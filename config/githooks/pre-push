@@ -1,0 +1,11 @@
+#!/bin/sh
+echo "before git push you should successfully execute 'gradlew build' "
+echo "executing gradlew build ... "
+./gradlew build
+if [ $? -ne 0 ];then
+    echo -e "[Pre-Push] reject: gradle build failure "
+    exit 1
+else
+    echo -e "[Pre-Push] success: allow to push "
+fi
+exit 0

@@ -1,0 +1,9 @@
+task copyGitHooks(type: Copy) {
+    if (file ("$project.rootDir/.git/hooks/pre-push").exists()) {
+        return
+    }
+    from file("$project.rootDir/config/githooks") into "$project.rootDir/.git/hooks/"
+    ("git config --local core.hooksPath ./.git/hooks").execute()
+    fileMode 0755
+}
+processResources.dependsOn copyGitHooks

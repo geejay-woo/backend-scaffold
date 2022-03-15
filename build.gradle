@@ -1,0 +1,67 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.11-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'checkstyle'
+	id 'java'
+	id 'idea'
+	id 'jacoco'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+apply from: "${rootProject.projectDir}/gradle/checkstyle.gradle"
+apply from: "${rootProject.projectDir}/gradle/idea.gradle"
+apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
+apply from: "${rootProject.projectDir}/gradle/git-hooks.gradle"
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	maven {
+		url 'https://maven.aliyun.com/repository/public/'
+	}
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+ext {
+	set('springCloudVersion', "2020.0.5")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	implementation 'org.mapstruct:mapstruct:1.5.0.Beta2'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+	checkstyle 'com.thomasjensen.checkstyle.addons:checkstyle-addons:6.0.1'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

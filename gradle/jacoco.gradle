@@ -1,0 +1,78 @@
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory = layout.buildDirectory.dir('$buildDir/reports/jacoco')
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, excludes: [
+                    '**/Application.class',
+                    '**/domain/**',
+                    '**/model/**',
+                    '**/config/**',
+                    '**/request/**',
+                    '**/response/**',
+                    '**/exception/**',
+                    '**/repository/**',
+                    '**/client/**',
+                    '**/mapper/**',
+                    '**/util/**',
+            ])
+        }))
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            excludes = [
+                    '**.Application',
+                    '**.domain.*',
+                    '**.model.*',
+                    '**.config.*',
+                    '**.request.*',
+                    '**.response.*',
+                    '**.exception.*',
+                    '**.repository.*',
+                    '**.client.*',
+                    '**.mapper.*',
+                    '**.util.*',
+            ]
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+jacocoTestCoverageVerification.dependsOn jacocoTestReport

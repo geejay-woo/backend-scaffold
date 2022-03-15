@@ -1,0 +1,8 @@
+checkstyle {
+    ignoreFailures = false
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+    toolVersion '8.21'
+    sourceSets = [sourceSets.main]
+}
+
+checkstyleTest.enabled = false

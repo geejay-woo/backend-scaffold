@@ -1,0 +1,10 @@
+idea {
+    project {
+        vcs = 'Git'
+    }
+    module {
+        jdkName = '11'
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
