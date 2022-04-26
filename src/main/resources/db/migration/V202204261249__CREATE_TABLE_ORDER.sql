@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `order` (
-    `id` bigint unsigned NOT NULL COMMENT '订单id',
+    `id` bigint unsigned auto_increment NOT NULL COMMENT '订单id',
     `order_code` varchar(255) NOT NULL COMMENT '订单编号',
     `description` varchar(255) COMMENT '描述',
     `order_title` varchar(255) COMMENT '订单标题',

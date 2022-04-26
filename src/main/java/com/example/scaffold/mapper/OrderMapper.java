@@ -1,6 +1,7 @@
 package com.example.scaffold.mapper;
 
 import com.example.scaffold.model.Order;
+import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
 import org.mapstruct.Mapper;
 
@@ -12,4 +13,6 @@ import static org.mapstruct.ReportingPolicy.IGNORE;
         nullValueCheckStrategy = ALWAYS, unmappedSourcePolicy = IGNORE, unmappedTargetPolicy = IGNORE)
 public interface OrderMapper {
     OrderDetailsResponse toOrderDetailResponse(Order order);
+
+    Order toOrder(SaveOrderRequest request);
 }

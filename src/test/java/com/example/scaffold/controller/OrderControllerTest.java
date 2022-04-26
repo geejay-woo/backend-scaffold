@@ -1,5 +1,6 @@
 package com.example.scaffold.controller;
 
+import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
 import com.example.scaffold.service.OrderService;
 import org.junit.Test;
@@ -11,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,5 +44,18 @@ public class OrderControllerTest {
         assertThat(result).isNotNull();
         assertThat(result.getBody().getOrderCode()).isEqualTo(orderCode);
         assertThat(result.getBody().getDescription()).isEqualTo(description);
+    }
+
+    @Test
+    public void should_save_success_when_save_order_given_order_info() {
+        // given
+        String orderCode = "orderCode";
+        SaveOrderRequest request = SaveOrderRequest.builder().orderCode(orderCode).build();
+
+        // when
+        orderController.postOrder(request);
+
+        // then
+        then(orderService).should(times(1)).saveOrder(request);
     }
 }

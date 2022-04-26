@@ -1,14 +1,12 @@
 package com.example.scaffold.controller;
 
+import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
 import com.example.scaffold.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
@@ -21,5 +19,12 @@ public class OrderController {
     public ResponseEntity<OrderDetailsResponse> getOrderDetails(@PathVariable("orderId")Long orderId) {
         OrderDetailsResponse orderDetailsResponse = orderService.getOrderByOrderId(orderId);
         return ResponseEntity.ok(orderDetailsResponse);
+    }
+
+    @PostMapping
+    @ApiOperation(value = "保存订单信息", httpMethod = "POST")
+    public ResponseEntity postOrder(@RequestBody SaveOrderRequest request) {
+        orderService.saveOrder(request);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -5,10 +5,12 @@ import com.example.scaffold.exception.BusinessException;
 import com.example.scaffold.mapper.OrderMapper;
 import com.example.scaffold.model.Order;
 import com.example.scaffold.repository.OrderRepository;
+import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -18,7 +20,9 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -65,4 +69,22 @@ public class OrderServiceTest {
         assertThat(throwable).isInstanceOf(BusinessException.class);
         assertThat(throwable).hasMessage("order cannot be found by order code");
     }
+
+    @Test
+    public void should_save_order_when_save_given_order_info() {
+        // given
+        String orderCode = "orderCode";
+        String orderTitle = "orderTitle";
+        SaveOrderRequest request = SaveOrderRequest.builder().orderCode(orderCode).orderTitle(orderTitle).build();
+        ArgumentCaptor<Order> orderCaptor = ArgumentCaptor.forClass(Order.class);
+
+        // when
+        when(orderRepository.save(orderCaptor.capture())).thenReturn(null);
+        orderService.saveOrder(request);
+
+        // then
+        assertThat(orderCaptor.getValue().getOrderCode()).isEqualTo(orderCode);
+        assertThat(orderCaptor.getValue().getOrderTitle()).isEqualTo(orderTitle);
+    }
+
 }
