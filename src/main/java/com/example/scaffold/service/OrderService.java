@@ -16,8 +16,8 @@ public class OrderService {
 
     private final OrderMapper orderMapper;
 
-    public OrderDetailsResponse getOrderBy(String orderCode) {
-        return orderRepository.findByOrderCode(orderCode)
+    public OrderDetailsResponse getOrderByOrderId(Long orderId) {
+        return orderRepository.findById(orderId)
                 .map(orderMapper::toOrderDetailResponse)
                 .orElseThrow(() -> new BusinessException(ErrorCodes.ORDER_CANNOT_FOUND));
     }

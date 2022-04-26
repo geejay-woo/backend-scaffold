@@ -4,3 +4,6 @@ spring:
     username: root
     password: geejay
     driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    show-sql: true

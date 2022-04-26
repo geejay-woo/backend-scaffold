@@ -7,17 +7,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/orders")
+@RestController
+@RequestMapping("/orders")
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/{orderId}")
     @ApiOperation(value = "获取订单详情", httpMethod = "GET", response = OrderDetailsResponse.class)
-    public ResponseEntity<OrderDetailsResponse> getOrderDetails(@PathVariable("orderId")String orderId) {
-        OrderDetailsResponse orderDetailsResponse = orderService.getOrderBy(orderId);
+    public ResponseEntity<OrderDetailsResponse> getOrderDetails(@PathVariable("orderId")Long orderId) {
+        OrderDetailsResponse orderDetailsResponse = orderService.getOrderByOrderId(orderId);
         return ResponseEntity.ok(orderDetailsResponse);
     }
 }

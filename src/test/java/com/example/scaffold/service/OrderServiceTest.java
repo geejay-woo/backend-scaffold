@@ -35,13 +35,14 @@ public class OrderServiceTest {
     @Test
     public void should_return_order_info_when_find_order_by_order_code_given_exist_order_with_order_code() {
         // given
+        Long orderId = 1L;
         String orderCode = "orderCode";
         Order order = Order.builder().orderCode(orderCode).id(1L)
                 .description("description").orderTitle("orderTitle").build();
 
         // when
-        when(orderRepository.findByOrderCode(orderCode)).thenReturn(Optional.of(order));
-        OrderDetailsResponse result = orderService.getOrderBy(orderCode);
+        when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
+        OrderDetailsResponse result = orderService.getOrderByOrderId(orderId);
 
         // then
         assertThat(result.getOrderCode()).isEqualTo(orderCode);
@@ -52,14 +53,15 @@ public class OrderServiceTest {
     @Test
     public void should_throw_exception_when_find_order_by_order_code_given_not_exist_order_with_order_code() {
         // given
+        Long orderId = 1L;
         String orderCode = "orderCode";
 
         // when
-        when(orderRepository.findByOrderCode(orderCode)).thenReturn(Optional.empty());
-        Throwable throwable = catchThrowable(() -> orderService.getOrderBy(orderCode));
+        when(orderRepository.findById(orderId)).thenReturn(Optional.empty());
+        Throwable throwable = catchThrowable(() -> orderService.getOrderByOrderId(orderId));
 
         // then
-        then(orderRepository).should().findByOrderCode(orderCode);
+        then(orderRepository).should().findById(orderId);
         assertThat(throwable).isInstanceOf(BusinessException.class);
         assertThat(throwable).hasMessage("order cannot be found by order code");
     }

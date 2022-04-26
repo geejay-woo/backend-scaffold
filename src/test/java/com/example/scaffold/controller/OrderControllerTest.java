@@ -25,14 +25,15 @@ public class OrderControllerTest {
     @Test
     public void should_return_order_details_when_get_order_given_order_is_exist() {
         // given
-        String orderCode = "orderCode";
+        Long orderId = 1L;
         String description = "description";
+        String orderCode = "code";
         OrderDetailsResponse response = OrderDetailsResponse.builder()
                 .orderCode(orderCode).description(description).build();
 
         // when
-        when(orderService.getOrderBy(orderCode)).thenReturn(response);
-        ResponseEntity<OrderDetailsResponse> result = orderController.getOrderDetails(orderCode);
+        when(orderService.getOrderByOrderId(orderId)).thenReturn(response);
+        ResponseEntity<OrderDetailsResponse> result = orderController.getOrderDetails(orderId);
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
