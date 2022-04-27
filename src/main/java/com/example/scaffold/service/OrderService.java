@@ -8,6 +8,7 @@ import com.example.scaffold.repository.OrderRepository;
 import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,7 @@ public class OrderService {
 
     private final OrderMapper orderMapper;
 
+    @Cacheable("orders")
     public OrderDetailsResponse getOrderByOrderId(Long orderId) {
         return orderRepository.findById(orderId)
                 .map(orderMapper::toOrderDetailResponse)

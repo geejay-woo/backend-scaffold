@@ -4,13 +4,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("订单响应详情")
-public class OrderDetailsResponse {
+public class OrderDetailsResponse implements Serializable {
 
     @ApiModelProperty("订单ID")
     private String orderCode;
