@@ -18,6 +18,7 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, excludes: [
                     '**/Application.class',
+                    '**/controller/**',
                     '**/domain/**',
                     '**/model/**',
                     '**/config/**',
@@ -27,7 +28,7 @@ jacocoTestReport {
                     '**/repository/**',
                     '**/client/**',
                     '**/mapper/**',
-                    '**/util/**',
+                    '**/utils/**',
             ])
         }))
     }
@@ -40,6 +41,7 @@ jacocoTestCoverageVerification {
             excludes = [
                     '**.Application',
                     '**.domain.*',
+                    '**.controller.*',
                     '**.model.*',
                     '**.config.*',
                     '**.request.*',
@@ -48,7 +50,7 @@ jacocoTestCoverageVerification {
                     '**.repository.*',
                     '**.client.*',
                     '**.mapper.*',
-                    '**.util.*',
+                    '**.utils.*',
             ]
             limit {
                 counter = 'LINE'
