@@ -1,0 +1,28 @@
+sourceSets {
+    integrationTest {
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+
+        resources {
+            srcDirs "src/integrationTest/resources", "src/integrationTest/java"
+        }
+    }
+}
+
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+}
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+integrationTest {
+    jvmArgs '-Dspring.profiles.active=test'
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
