@@ -8,10 +8,12 @@ import com.example.scaffold.repository.OrderRepository;
 import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class OrderService {
 
@@ -23,7 +25,10 @@ public class OrderService {
     public OrderDetailsResponse getOrderByOrderId(Long orderId) {
         return orderRepository.findById(orderId)
                 .map(orderMapper::toOrderDetailResponse)
-                .orElseThrow(() -> new BusinessException(ErrorCodes.ORDER_CANNOT_FOUND));
+                .orElseThrow(() -> {
+                    log.error("orderId not found, orderId: {}", orderId);
+                    return new BusinessException(ErrorCodes.ORDER_CANNOT_FOUND);
+                });
     }
 
     public void saveOrder(SaveOrderRequest request) {

@@ -5,7 +5,10 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCodes {
-    ORDER_CANNOT_FOUND(404002, "order cannot be found by order code", HttpStatus.NOT_FOUND);
+
+    ORDER_CANNOT_FOUND(404002, "order cannot be found by order code", HttpStatus.NOT_FOUND),
+
+    UNKNOWN_ERROR(500001,"unknown error", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final int code;
     private final String message;

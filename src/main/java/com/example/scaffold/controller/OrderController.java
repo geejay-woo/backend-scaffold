@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class OrderController {
 
     @PostMapping
     @ApiOperation(value = "保存订单信息", httpMethod = "POST")
-    public ResponseEntity postOrder(@RequestBody SaveOrderRequest request) {
+    public ResponseEntity postOrder(@RequestBody @Valid SaveOrderRequest request) {
         orderService.saveOrder(request);
         return ResponseEntity.noContent().build();
     }
