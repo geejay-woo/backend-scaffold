@@ -5,7 +5,7 @@ spring:
     password: geejay
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
-    show-sql: true
+    show-sql: false
   redis:
     host: localhost
     port: 6379
@@ -16,6 +16,22 @@ spring:
         max-active: 50
         max-wait: 30000
     connect-timeout: 3000
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: geejaywoo
+    password: geejaywoo
+    listener:
+      simple:
+#       3次重试后失败 丢弃消息
+        default-requeue-rejected: true
+        retry:
+          enabled: true
+          initial-interval: 3000ms
+          max-attempts: 3
+application:
+  mq:
+    enabled: true
 management:
   endpoints:
     web:

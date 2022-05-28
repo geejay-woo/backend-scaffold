@@ -29,6 +29,7 @@ jacocoTestReport {
                     '**/client/**',
                     '**/mapper/**',
                     '**/utils/**',
+                    '**/event/**'
             ])
         }))
     }
@@ -51,6 +52,7 @@ jacocoTestCoverageVerification {
                     '**.client.*',
                     '**.mapper.*',
                     '**.utils.*',
+                    '**.event.*'
             ]
             limit {
                 counter = 'LINE'

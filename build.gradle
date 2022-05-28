@@ -14,7 +14,7 @@ sourceCompatibility = '11'
 apply from: "${rootProject.projectDir}/gradle/checkstyle.gradle"
 apply from: "${rootProject.projectDir}/gradle/idea.gradle"
 apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
-//apply from: "${rootProject.projectDir}/gradle/integration-test.gradle"
+apply from: "${rootProject.projectDir}/gradle/integration-test.gradle"
 apply from: "${rootProject.projectDir}/gradle/git-hooks.gradle"
 
 configurations {
@@ -38,7 +38,7 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-//	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
