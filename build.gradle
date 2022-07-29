@@ -63,6 +63,8 @@ dependencies {
 	testImplementation 'junit:junit:4.13.2'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	testImplementation 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+	testImplementation 'io.projectreactor:reactor-test:3.4.7'
+
 	checkstyle 'com.thomasjensen.checkstyle.addons:checkstyle-addons:6.0.1'
 }
 
