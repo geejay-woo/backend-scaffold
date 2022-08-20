@@ -6,6 +6,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     show-sql: false
+    hibernate:
+      ddl-auto: update
   redis:
     host: localhost
     port: 6379
