@@ -1,23 +1,23 @@
-package com.example.scaffold.model;
+package com.example.scaffold.model.jpa.oneToMany;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Table
 @Entity
 @Accessors(chain = true)
-public class School {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
-    @OneToMany(mappedBy="school", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<Student> students;
+    @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @JoinColumn(name = "school_fk")
+    private School school;
 }
 

@@ -3,7 +3,7 @@ package com.example.scaffold.service;
 
 import com.example.scaffold.exception.BusinessException;
 import com.example.scaffold.mapper.OrderMapper;
-import com.example.scaffold.model.Order;
+import com.example.scaffold.model.master.Order;
 import com.example.scaffold.repository.OrderRepository;
 import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
@@ -20,9 +20,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)

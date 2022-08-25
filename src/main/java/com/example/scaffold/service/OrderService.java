@@ -3,7 +3,7 @@ package com.example.scaffold.service;
 import com.example.scaffold.exception.BusinessException;
 import com.example.scaffold.exception.ErrorCodes;
 import com.example.scaffold.mapper.OrderMapper;
-import com.example.scaffold.model.Order;
+import com.example.scaffold.model.master.Order;
 import com.example.scaffold.repository.OrderRepository;
 import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;

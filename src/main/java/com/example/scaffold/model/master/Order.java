@@ -1,4 +1,4 @@
-package com.example.scaffold.model;
+package com.example.scaffold.model.master;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;

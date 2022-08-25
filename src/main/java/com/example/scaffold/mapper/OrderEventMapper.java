@@ -1,7 +1,7 @@
 package com.example.scaffold.mapper;
 
 import com.example.scaffold.event.domain.OrderEvent;
-import com.example.scaffold.model.Order;
+import com.example.scaffold.model.master.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

@@ -1,14 +1,13 @@
 package com.example.scaffold.jpa;
 
-import com.example.scaffold.model.School;
-import com.example.scaffold.model.Student;
+import com.example.scaffold.model.jpa.oneToMany.School;
+import com.example.scaffold.model.jpa.oneToMany.Student;
 import com.example.scaffold.repository.SchoolRepository;
 import com.example.scaffold.repository.StudentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Repository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;

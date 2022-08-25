@@ -1,6 +1,6 @@
 package com.example.scaffold.mapper;
 
-import com.example.scaffold.model.Order;
+import com.example.scaffold.model.master.Order;
 import com.example.scaffold.request.SaveOrderRequest;
 import com.example.scaffold.response.OrderDetailsResponse;
 import org.mapstruct.Mapper;
