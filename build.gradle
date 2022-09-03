@@ -17,11 +17,6 @@ apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
 //apply from: "${rootProject.projectDir}/gradle/integration-test.gradle"
 apply from: "${rootProject.projectDir}/gradle/git-hooks.gradle"
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
 
 repositories {
 	maven {
