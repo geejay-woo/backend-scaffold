@@ -7,3 +7,4 @@ out
 *.iws
 /.lfsconfig
 .DS_Store
+**/generated
