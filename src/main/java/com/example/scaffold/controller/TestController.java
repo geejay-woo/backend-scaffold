@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @RestController
 @RequestMapping("/test")
@@ -12,6 +14,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private final TestService testService;
+
+    // InheritableThreadLocal的运行机制是在新建线程的时候,
+    // 如果在切换线程的时候, 当前线程没有新建线程(比如使用了一个固定线程池), 则切换线程后, 不一定能获取到这个值
+    // 但是形如Schedulers.newSingle("新创建的线程")或直接new Thread()则会在新的线程获取这个值
+    private static final InheritableThreadLocal<String> threadLocal = new InheritableThreadLocal<>();
+
+    @GetMapping("inherit")
+    public void testInheritableThreadLocal() {
+        threadLocal.set("mainThread");
+        System.out.println("value:" + threadLocal.get());
+//        Thread thread = new Thread(() -> {
+//            String value = threadLocal.get();
+//            System.out.println("value:" + value);
+//        });
+//        thread.start();
+        Mono.fromRunnable(() -> {
+            String result = threadLocal.get();
+            System.out.println("value:" + result);
+        }).subscribeOn(Schedulers.newSingle("新创建的线程")).block();
+        return;
+    }
 
     @GetMapping
     public String testExecutorGetThreadContext() {
