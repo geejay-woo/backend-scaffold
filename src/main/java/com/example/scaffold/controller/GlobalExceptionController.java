@@ -43,7 +43,6 @@ public class GlobalExceptionController {
     }
 
     // 自由添加异常处理器
-
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorResponse> unknownException(RuntimeException e) {
         log.error("unknown exception, stack: {}", e);

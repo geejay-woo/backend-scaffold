@@ -18,7 +18,7 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     @ApiOperation(value = "获取订单详情", httpMethod = "GET", response = OrderDetailsResponse.class)
-    public ResponseEntity<OrderDetailsResponse> getOrderDetails(@PathVariable("orderId")Long orderId) {
+    public ResponseEntity<OrderDetailsResponse> getOrderDetails(@PathVariable("orderId") Long orderId) {
         OrderDetailsResponse orderDetailsResponse = orderService.getOrderByOrderId(orderId);
         return ResponseEntity.ok(orderDetailsResponse);
     }
