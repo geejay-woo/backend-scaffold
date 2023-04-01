@@ -36,6 +36,8 @@ public class TestController {
         return;
     }
 
+    // 该接口使用线程池进行异步任务, 测试线程池里的线程每次销毁了Context信息的测试：resources/HTTP请求.jmx
+    // beanShell脚本中jmeter内置的对象api: https://jmeter.apache.org/api/org/apache/jmeter/protocol/http/control/Header.html
     @GetMapping
     public String testExecutorGetThreadContext() {
         return testService.testExecutorGetThreadContext();
