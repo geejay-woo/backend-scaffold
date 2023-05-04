@@ -78,8 +78,10 @@ dependencyManagement {
 }
 
 bootRun {
+	debug true
 	systemProperty 'spring.jpa.properties.hibernate.format_sql', true
 	systemProperty 'spring.jpa.properties.hibernate.show_sql', true
 	systemProperty 'spring.mvc.log-request-details', true
 	systemProperty 'logging.level.org.springframework.web', 'DEBUG'
+	systemProperty 'logging.level.org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener', 'DEBUG'
 }
