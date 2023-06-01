@@ -5,9 +5,9 @@ spring:
     password: geejay
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   redis:
     host: localhost
     port: 6379
