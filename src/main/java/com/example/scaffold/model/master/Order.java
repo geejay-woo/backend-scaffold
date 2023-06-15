@@ -19,7 +19,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "`order`")
-
+@NamedEntityGraph(
+        name = "Order_Graph",
+        attributeNodes = @NamedAttributeNode(value = "user")
+)
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

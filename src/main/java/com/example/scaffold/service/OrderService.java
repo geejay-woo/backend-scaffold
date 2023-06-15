@@ -43,6 +43,6 @@ public class OrderService {
     }
 
     public List<OrderWithParentId> getOrderInfo() {
-        return orderTemplateMappingRepository.getOrderInfos(1L);
+        return orderRepository.getOrderInfos(1L);
     }
 }
