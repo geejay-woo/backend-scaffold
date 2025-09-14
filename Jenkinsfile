@@ -40,7 +40,7 @@ spec:
         memory: "4Gi"
         cpu: "2000m"
     volumeMounts:
-      - name: cacheDir
+      - name: cache-dir
         mountPath: /root/.gradle  # Maven缓存目录
         readOnly: false
     env:
@@ -79,7 +79,7 @@ spec:
     - name: TZ
       value: "Asia/Shanghai"
   volumes:
-  - name: cacheDir
+  - name: cache-dir
     emptyDir: {}  # 临时存储Maven依赖
   restartPolicy: Never
 """
