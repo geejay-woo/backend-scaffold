@@ -30,7 +30,7 @@ spec:
     - name: TZ
       value: "Asia/Shanghai"
   - name: jdk
-    image: maven:3.8.6-openjdk-17  # 包含Maven和JDK的镜像
+    image: gradle:7.6-jdk11  # 包含Maven和JDK的镜像
     imagePullPolicy: IfNotPresent
     command: ['cat']
     tty: true
@@ -43,7 +43,7 @@ spec:
         cpu: "2000m"
     volumeMounts:
       - name: cacheDir
-        mountPath: /root/.m2  # Maven缓存目录
+        mountPath: /root/.gradle  # Maven缓存目录
         readOnly: false
     env:
     - name: TZ
@@ -199,13 +199,13 @@ spec:
             steps {
                 container('jdk') {
                     // 编译代码
-                    sh 'mvn clean compile -DskipTests'
+                    sh 'gradle clean build -x test'
 
                     // 运行单元测试
-                    sh 'mvn test'
+                    sh 'gradle test'
 
                     // 生成测试报告
-                    junit 'target/surefire-reports/*.xml'
+                    junit 'build/test-results/test/*.xml'
 
                     // 代码覆盖率报告（如果配置了JaCoCo）
                     jacoco()
@@ -239,14 +239,13 @@ spec:
         stage('Package') {
             steps {
                 container('jdk') {
-                    // 打包应用（跳过测试，因为前面已经运行过）
-                    sh 'mvn package -DskipTests'
+                    sh 'gradle assemble'
 
-                    // 存档JAR文件
-                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                    // 修改存档路径
+                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
 
-                    // 存储JAR文件用于后续步骤
-                    stash name: 'app-jar', includes: 'target/*.jar'
+                    // 修改存储路径
+                    stash name: 'app-jar', includes: 'build/libs/*.jar'
                 }
             }
         }
@@ -260,7 +259,7 @@ spec:
 
                     // 构建Docker镜像
                     script {
-                        docker.build("${DOCKER_IMAGE}", "--build-arg JAR_FILE=target/*.jar -f Dockerfile .")
+                        docker.build("${DOCKER_IMAGE}", "--build-arg JAR_FILE=build/libs/*.jar -f Dockerfile .")
                     }
                 }
             }
