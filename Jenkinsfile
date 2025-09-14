@@ -301,7 +301,7 @@ spec:
             steps {
                 container('kubectl') {
                     sh """
-                    /usr/local/bin/kubectl --kubeconfig $MY_KUBECONFIG set image deploy -l app=${IMAGE_NAME} ${IMAGE_NAME}=${HARBOR_ADDRESS}/${REGISTRY_DIR}/${IMAGE_NAME}:${TAG} -n ${NAMESPACE}
+                    /usr/local/bin/kubectl --kubeconfig ${MY_KUBECONFIG} set image deploy -l app=${IMAGE_NAME} ${IMAGE_NAME}=${HARBOR_ADDRESS}/${REGISTRY_DIR}/${IMAGE_NAME}:${TAG} -n ${NAMESPACE}
                     """
 //                     script {
 //                         // 写入kubeconfig文件
