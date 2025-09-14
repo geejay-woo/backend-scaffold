@@ -5,8 +5,6 @@ pipeline {
         kubernetes {
             cloud 'docker-desktop'
             slaveConnectTimeout 1200
-            // 使用自定义的Pod模板
-            workspaceVolume hostPathWorkspaceVolume {hostPath: "/Users/geejaywoo/opt/tmp/jenkins-workplace", readOnly: false}
             yaml """
 apiVersion: v1
 kind: Pod
