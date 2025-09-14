@@ -166,7 +166,6 @@ spec:
         stage('Checkout') {
             when {
                 expression {
-                    # 若不为空执行同级的另一个stage
                     env.githubBranch == null
                 }
             }
