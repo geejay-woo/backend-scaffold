@@ -254,23 +254,5 @@ spec:
                 }
             }
         }
-
-
-        // 总是执行的操作
-        always {
-            // 清理工作空间
-            cleanWs()
-
-            // 记录构建指标
-            recordIssues(
-                tools: [java(), maven()],
-                enabledForFailure: true
-            )
-
-            // 更新构建描述
-            script {
-                currentBuild.description = "Env: ${params.DEPLOY_ENV}, Image: ${DOCKER_IMAGE}"
-            }
-        }
     }
 }
