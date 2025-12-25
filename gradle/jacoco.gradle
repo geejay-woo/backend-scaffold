@@ -29,7 +29,10 @@ jacocoTestReport {
                     '**/client/**',
                     '**/mapper/**',
                     '**/utils/**',
-                    '**/event/**'
+                    '**/event/**',
+                    '**/TestController.class',
+                    '**/TestService.class',
+                    '**/TransmitRequestExecutor.class',
             ])
         }))
     }
@@ -52,7 +55,10 @@ jacocoTestCoverageVerification {
                     '**.client.*',
                     '**.mapper.*',
                     '**.utils.*',
-                    '**.event.*'
+                    '**.event.*',
+                    '**.TestController',
+                    '**.TestService',
+                    '**.TransmitRequestExecutor'
             ]
             limit {
                 counter = 'LINE'

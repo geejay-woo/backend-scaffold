@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
